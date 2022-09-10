@@ -1,15 +1,13 @@
 const express = require('express')
 const router = express.Router()
+const axios = require('axios')
 
-const AllCharactersUrl = "https://rickandmortyapi.com/api";
-
-async function getAllCharacters() {
-    let response = await fetch(AllCharactersUrl);
-    console.log(response + 'esta es la response :v');
-
-    let data = await response.json();
-    console.log(data);
-
-}
+axios.get('https://rickandmortyapi.com/api/character')
+    .then(response => {
+        console.log(response.data)
+    })
+    .catch(error => {
+        console.log(error)
+    })
 
 module.exports = router
