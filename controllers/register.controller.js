@@ -8,30 +8,21 @@ const db = mysql.createConnection({
 })
 
 exports.register = (req, res) => {
+    
     const {username, email, password, confirmedpassword} = req.body
+
+    
 
     db.query('SELECT username FROM registeredusers WHERE username = ?', [username], (error, results) => {
         if (error) {
             console.log(error)
         }
-        if (results.length > 0) {
+        else if (results.length > 0) {
             res.render('register', {
                 messageUserName: 'UserName already exists'
             })
-        } 
-
-        db.query('SELECT email FROM registeredusers WHERE email = ?', [email], (error, results) => {
-            if (error) {
-                console.log(error)
-            }
-            if (results.length > 0) {
-                res.render('register', {
-                    messageEmail: 'Email already registered'
-                })
-            }
-        }) 
-        
-        if (password !== confirmedpassword) {
+        }      
+        else if (password !== confirmedpassword) {
             res.render('register', {
                 messagePassword: 'Both passwords must be the same'
             })
@@ -39,7 +30,7 @@ exports.register = (req, res) => {
         
         else {
 
-            db.query('INSERT INTO registeredusers SET ?', {username: username, email: email, password: password}, (error, results) => {
+            db.query('INSERT INTO registeredusers SET ?', { email: email, password: password}, (error, results) => {
                 if (error) {
                     console.log(error)
                 }

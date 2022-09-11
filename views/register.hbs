@@ -9,16 +9,22 @@
 </head>
 <body>
     
-<form action="../register/register.controller" method="post">
+<form action="../register/register" method="POST">
 
     <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label">UserName</label>
-        <input type="password" class="form-control" id="username" name="username">
+        <label for="exampleInputName1" class="form-label">UserName</label>
+        <input type="text" class="form-control" id="username" name="username">
+        {{#if messageUserName}}
+            <h2>{{messageUserName}}</h2>
+        {{/if}}
     </div>
     <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label">Email address</label>
         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp">
         <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        {{#if messageEmail}}
+            <h2>{{messageEmail}}</h2>
+        {{/if}}
     </div>
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -27,9 +33,15 @@
     <div class="mb-3">
         <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
         <input type="password" class="form-control" id="confirmedpassword" name="confirmedpassword">
+        {{#if messagePassword}}
+            <h2>{{messagePassword}}</h2>
+        {{/if}}
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+    {{#if messageSuccesfull}}
+    <h2>{{messageSuccesfull}}</h2>
+    {{/if}}
 
 </form>
 
